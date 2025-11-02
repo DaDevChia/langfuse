@@ -74,6 +74,7 @@ services:
       - 3000:3000
     environment:
       <<: *langfuse-worker-env
+      AUTH_DISABLE_SIGNUP: ${AUTH_DISABLE_SIGNUP:-true}  
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-mysecret} # CHANGEME
       LANGFUSE_INIT_ORG_ID: ${LANGFUSE_INIT_ORG_ID:-}
       LANGFUSE_INIT_ORG_NAME: ${LANGFUSE_INIT_ORG_NAME:-}
