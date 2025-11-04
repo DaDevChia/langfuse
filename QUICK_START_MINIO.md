@@ -102,10 +102,22 @@ The bucket is auto-created by MinIO's entrypoint. Check:
 docker-compose exec minio ls /data/
 ```
 
-### Wrong credentials
-Make sure credentials match between:
-- `.env` file
-- `docker-compose.yml` (uses variables from .env)
+### SignatureDoesNotMatch errors
+**Most common cause:** MinIO credentials don't match S3 configuration.
+
+✅ **Fix:** Ensure these match in your `.env`:
+```bash
+MINIO_ROOT_USER=minio
+MINIO_ROOT_PASSWORD=miniosecret
+
+# All S3 configs must use the same credentials
+LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID=minio
+LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY=miniosecret
+LANGFUSE_S3_MEDIA_UPLOAD_ACCESS_KEY_ID=minio
+LANGFUSE_S3_MEDIA_UPLOAD_SECRET_ACCESS_KEY=miniosecret
+```
+
+📖 See [TROUBLESHOOTING_MINIO_CREDENTIALS.md](./TROUBLESHOOTING_MINIO_CREDENTIALS.md) for detailed help.
 
 ## Next Steps
 

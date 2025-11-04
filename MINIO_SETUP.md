@@ -140,17 +140,24 @@ docker-compose restart
    - Check: `docker-compose ps minio`
    - Solution: Ensure MinIO is healthy
 
-2. **"Access Denied" or "InvalidAccessKeyId"**
-   - Credentials mismatch between .env and docker-compose.yml
+2. **"SignatureDoesNotMatch" - Most Common Issue!**
+   - MinIO credentials don't match S3 configuration credentials
+   - **Critical:** `MINIO_ROOT_USER` must equal all `LANGFUSE_S3_*_ACCESS_KEY_ID`
+   - **Critical:** `MINIO_ROOT_PASSWORD` must equal all `LANGFUSE_S3_*_SECRET_ACCESS_KEY`
+   - Check: Verify all credentials match in your `.env` file
+   - Solution: See [TROUBLESHOOTING_MINIO_CREDENTIALS.md](./TROUBLESHOOTING_MINIO_CREDENTIALS.md)
+
+3. **"Access Denied" or "InvalidAccessKeyId"**
+   - Similar to SignatureDoesNotMatch - credentials mismatch
    - Check: Verify `MINIO_ROOT_USER` and `MINIO_ROOT_PASSWORD`
    - Solution: Ensure credentials match in all configurations
 
-3. **"Bucket does not exist"**
+4. **"Bucket does not exist"**
    - The langfuse bucket was not created
    - Solution: The bucket is auto-created by the entrypoint command in docker-compose.yml
    - Check: `docker-compose logs minio` for startup errors
 
-4. **"Network error" or "EAI_AGAIN"**
+5. **"Network error" or "EAI_AGAIN"**
    - DNS resolution issues
    - Solution: Ensure all services are on the same Docker network
 
