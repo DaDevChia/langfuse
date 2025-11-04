@@ -30,7 +30,7 @@ const config = {
   accessKeyId: process.env.LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID || "minio",
   secretAccessKey: process.env.LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY || "miniosecret",
   bucket: process.env.LANGFUSE_S3_EVENT_UPLOAD_BUCKET || "langfuse",
-  region: process.env.LANGFUSE_S3_EVENT_UPLOAD_REGION || "auto",
+  region: process.env.LANGFUSE_S3_EVENT_UPLOAD_REGION || "us-east-1",
   forcePathStyle: process.env.LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE === "true" || true,
 };
 

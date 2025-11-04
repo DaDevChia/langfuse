@@ -38,7 +38,7 @@ if command -v aws &> /dev/null; then
     
     export AWS_ACCESS_KEY_ID="$ACCESS_KEY"
     export AWS_SECRET_ACCESS_KEY="$SECRET_KEY"
-    export AWS_DEFAULT_REGION="auto"
+    export AWS_DEFAULT_REGION="us-east-1"
     
     if aws --endpoint-url="$ENDPOINT" s3 ls 2>&1 | grep -q "$BUCKET"; then
         echo "✅ Bucket '$BUCKET' found"

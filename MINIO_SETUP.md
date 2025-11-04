@@ -69,7 +69,7 @@ export LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT="http://localhost:9090"
 export LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID="minio"
 export LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY="miniosecret"
 export LANGFUSE_S3_EVENT_UPLOAD_BUCKET="langfuse"
-export LANGFUSE_S3_EVENT_UPLOAD_REGION="auto"
+export LANGFUSE_S3_EVENT_UPLOAD_REGION="us-east-1"
 export LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE="true"
 
 npx tsx scripts/verify-s3-connection.ts
