@@ -18,6 +18,8 @@ services:
         condition: service_healthy
     ports:
       - 127.0.0.1:3030:3030
+    env_file:
+      - .env
     environment: &langfuse-worker-env
       NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
       DATABASE_URL: ${DATABASE_URL:-postgresql://postgres:postgres@postgres:5432/postgres} # CHANGEME
@@ -70,10 +72,14 @@ services:
     image: docker.io/langfuse/langfuse:3
     restart: always
     depends_on: *langfuse-depends-on
+    networks:
+      - nginx
+      - default
     ports:
       - 3000:3000
     environment:
       <<: *langfuse-worker-env
+      HOSTNAME: 0.0.0.0
       AUTH_DISABLE_SIGNUP: ${AUTH_DISABLE_SIGNUP:-true}  
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-mysecret} # CHANGEME
       LANGFUSE_INIT_ORG_ID: ${LANGFUSE_INIT_ORG_ID:-}
@@ -119,6 +125,9 @@ services:
     ports:
       - 9090:9000
       - 127.0.0.1:9091:9001
+    networks:
+      - nginx
+      - default
     volumes:
       - langfuse_minio_data:/data
     healthcheck:
@@ -170,3 +179,7 @@ volumes:
     driver: local
   langfuse_minio_data:
     driver: local
+
+networks:
+  nginx:
+    external: true
