@@ -117,6 +117,8 @@ services:
     image: docker.io/minio/minio
     restart: always
     entrypoint: sh
+    env_file:
+      - .env
     # create the 'langfuse' bucket before starting the service
     command: -c 'mkdir -p /data/langfuse && minio server --address ":9000" --console-address ":9001" /data'
     environment:
